@@ -5,6 +5,29 @@ const elements = {
     author: document.getElementById("author"),
 };
 
+async function getRandomImage() {
+    const client_id = "Dz-egZQlftFy5J6gIJAz-n88n6pvzMk5xAKh946C4b4";
+    const endpoint = `https://api.unsplash.com/photos/random/?client_id=${client_id}`;
+    try {
+        const response = await fetch(endpoint);
+        const returnedData = await response.json()
+        console.log(returnedData);
+        const receivedPhotoUrl = returnedData.urls.regular;
+        
+        const imgDiv = document.querySelector(".background-img");
+        
+        imgDiv.style.backgroundImage = `url("${receivedPhotoUrl}")`;
+
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getRandomImage();
+
+
+/*
+You can delete the section, but maybe you want to be able to reference it in the future.
 
 const quotes = [
     {
@@ -36,4 +59,4 @@ function loopThroughQuotes() {
     }, 3000);
 }
 
-setTimeout(loopThroughQuotes, 3000);
+setTimeout(loopThroughQuotes, 3000); */
