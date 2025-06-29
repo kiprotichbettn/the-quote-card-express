@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const elements = {
     quote: document.getElementById("quote"),
@@ -6,6 +6,24 @@ const elements = {
 };
 
 async function getRandomImage() {
+    const endpoint = "http://localhost:8080/api/v1/getRandomImage";
+    try {
+        const response = await fetch(endpoint);
+        const returnedData = await response.json();
+        const receivedPhotoUrl = returnedData.data;
+
+        const imgDiv = document.querySelector(".background-img");
+        imgDiv.style.backgroundImage = `url(${receivedPhotoUrl})`;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+getRandomImage();
+
+
+
+/* async function getRandomImage() {
     const client_id = "Dz-egZQlftFy5J6gIJAz-n88n6pvzMk5xAKh946C4b4";
     const endpoint = `https://api.unsplash.com/photos/random/?client_id=${client_id}`;
     try {
@@ -22,9 +40,10 @@ async function getRandomImage() {
         console.error(error)
     }
 }
+    
 
 getRandomImage();
-
+*/
 
 /*
 You can delete the section, but maybe you want to be able to reference it in the future.
